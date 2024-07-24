@@ -10,7 +10,6 @@ const upload = multer({storage: storage});
 
 router.post('/', auth, upload.array('images', 4), async (req, res) => {
     const {description} = req.body;
-    const user = req.user.id;
 
     try {
         const images = await Promise.all(
@@ -22,7 +21,6 @@ router.post('/', auth, upload.array('images', 4), async (req, res) => {
             })
         )
         const newPost = new Post ({
-            user,
             description,
             images,
         });
